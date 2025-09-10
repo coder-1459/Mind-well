@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Tasks - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>MindWell</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="tasks.html" class="active">Daily Tasks</a></li>
+                <li><a href="mood.html">Mood Tracker</a></li>
+                <li><a href="appointments.html">Book Appointment</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="tasks-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="tasks-header">
+                <div class="header-content">
+                    <h1 class="section-title">Daily Cognitive Tasks</h1>
+                    <p class="section-description">
+                        Complete positive, brain-boosting activities designed to enhance your IQ and mental resilience. 
+                        Each task has a 20-hour completion window - the opposite of harmful challenges, focusing purely on growth and wellness.
+                    </p>
+                </div>
+                <div class="task-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-fire"></i>
+                        <span id="currentStreak">0</span>
+                        <label>Day Streak</label>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="totalCompleted">0</span>
+                        <label>Tasks Completed</label>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="timeRemaining">--</span>
+                        <label>Time Remaining</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Tasks -->
+            <div class="tasks-container">
+                <div class="tasks-section-header">
+                    <h2><i class="fas fa-calendar-day"></i> Today's Challenges</h2>
+                    <button class="btn btn-secondary" id="generateNewTasks">
+                        <i class="fas fa-sync-alt"></i> Generate New Tasks
+                    </button>
+                </div>
+
+                <div class="daily-tasks-grid" id="dailyTasksGrid">
+                    <!-- Today's tasks will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Task Categories -->
+            <div class="categories-section">
+                <h2 class="section-title">Task Categories</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="cognitive">
+                        <div class="category-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Cognitive Enhancement</h3>
+                        <p>Puzzles, brain teasers, and logical reasoning exercises to boost mental agility</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="cognitive-completed">0</span> completed
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="creative">
+                        <div class="category-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Creative Expression</h3>
+                        <p>Writing, drawing, and imaginative exercises to enhance creativity and self-expression</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="creative-completed">0</span> completed
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="physical">
+                        <div class="category-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>Physical Wellness</h3>
+                        <p>Mindful movement, breathing exercises, and activities that connect mind and body</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="physical-completed">0</span> completed
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="social">
+                        <div class="category-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Social Connection</h3>
+                        <p>Activities that strengthen relationships and build meaningful social connections</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="social-completed">0</span> completed
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="learning">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Continuous Learning</h3>
+                        <p>Educational activities, skill development, and knowledge expansion exercises</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="learning-completed">0</span> completed
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="mindfulness">
+                        <div class="category-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Mindfulness & Peace</h3>
+                        <p>Meditation, reflection, and mindfulness practices for mental clarity and calm</p>
+                        <div class="category-stats">
+                            <span class="completed-count" id="mindfulness-completed">0</span> completed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Completed Tasks -->
+            <div class="completed-tasks-section" id="completedTasksSection">
+                <h2 class="section-title">Recently Completed Tasks</h2>
+                <div class="completed-tasks-list" id="completedTasksList">
+                    <!-- Completed tasks will be shown here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Task Completion Modal -->
+    <div class="modal-overlay" id="completionModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-trophy"></i> Task Completed!</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="completion-celebration">
+                    <div class="celebration-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 id="completedTaskTitle">Great job!</h4>
+                    <p id="completedTaskMessage">You've successfully completed this cognitive enhancement task.</p>
+                    <div class="completion-stats">
+                        <div class="stat">
+                            <span class="stat-number">+1</span>
+                            <span class="stat-label">Task Completed</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="streakBonus">+1</span>
+                            <span class="stat-label">Streak Day</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reflection-section">
+                    <h4>How did this task make you feel?</h4>
+                    <textarea class="form-control" id="taskReflection" placeholder="Share your thoughts about this experience..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="skipReflection">Skip</button>
+                <button class="btn btn-primary" id="saveReflection">Save Reflection</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindWell</h3>
+                    <p>Your companion for mental wellness and cognitive growth</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="assessment.html">Take Assessment</a></li>
+                        <li><a href="tasks.html">Daily Tasks</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Tips</a></li>
+                        <li><a href="#">Emergency Helpline</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindWell. Created with care for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize theme manager for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.themeManager) {
+                window.themeManager = new ThemeManager();
+            }
+        });
+        class TasksPage {
+            constructor() {
+                this.taskGenerator = new TaskGenerator();
+                this.todaysTasks = [];
+                this.completedTasks = [];
+                this.init();
+            }
+
+            init() {
+                this.loadTodaysTasks();
+                this.updateStats();
+                this.updateCategoryStats();
+                this.loadCompletedTasks();
+                this.bindEvents();
+                this.startCountdown();
+            }
+
+            bindEvents() {
+                // Generate new tasks
+                document.getElementById('generateNewTasks').addEventListener('click', () => {
+                    this.generateNewTasks();
+                });
+
+                // Modal events
+                document.getElementById('closeModal').addEventListener('click', () => {
+                    this.closeCompletionModal();
+                });
+
+                document.getElementById('skipReflection').addEventListener('click', () => {
+                    this.closeCompletionModal();
+                });
+
+                document.getElementById('saveReflection').addEventListener('click', () => {
+                    this.saveTaskReflection();
+                });
+
+                // Close modal on outside click
+                document.getElementById('completionModal').addEventListener('click', (e) => {
+                    if (e.target.id === 'completionModal') {
+                        this.closeCompletionModal();
+                    }
+                });
+            }
+
+            loadTodaysTasks() {
+                const today = new Date().toDateString();
+                const data = storage.getData();
+                
+                // Check if we have tasks for today
+                const todaysStoredTasks = data.dailyTasks.filter(task => 
+                    new Date(task.date).toDateString() === today
+                );
+
+                if (todaysStoredTasks.length === 0) {
+                    // Generate new tasks for today
+                    this.generateTodaysTasks();
+                } else {
+                    this.todaysTasks = todaysStoredTasks;
+                    this.displayTodaysTasks();
+                }
+            }
+
+            generateTodaysTasks() {
+                const newTasks = this.taskGenerator.generateDailyTasks(3);
+                
+                newTasks.forEach(task => {
+                    const taskData = {
+                        ...task,
+                        id: Date.now() + Math.random(),
+                        date: new Date().toISOString(),
+                        deadline: new Date(Date.now() + 20 * 60 * 60 * 1000).toISOString(), // 20 hours
+                        completed: false
+                    };
+                    
+                    storage.addTask(taskData);
+                    this.todaysTasks.push(taskData);
+                });
+
+                this.displayTodaysTasks();
+                Utils.showNotification('New tasks generated for today!', 'success');
+            }
+
+            generateNewTasks() {
+                // Clear today's uncompleted tasks
+                const data = storage.getData();
+                const today = new Date().toDateString();
+                
+                data.dailyTasks = data.dailyTasks.filter(task => 
+                    new Date(task.date).toDateString() !== today || task.completed
+                );
+                
+                storage.data = data;
+                storage.saveData();
+
+                // Generate fresh tasks
+                this.todaysTasks = [];
+                this.generateTodaysTasks();
+            }
+
+            displayTodaysTasks() {
+                const container = document.getElementById('dailyTasksGrid');
+                
+                if (this.todaysTasks.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-tasks-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>All tasks completed!</h3>
+                            <p>Great job! You've completed all your daily tasks.</p>
+                            <button class="btn btn-primary" onclick="window.location.reload()">Generate New Tasks</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = this.todaysTasks.map(task => `
+                    <div class="task-card ${task.completed ? 'completed' : ''}" data-task-id="${task.id}">
+                        <div class="task-header">
+                            <div class="task-category">
+                                <i class="fas ${this.getCategoryIcon(task.category)}"></i>
+                                <span class="category-name">${task.category}</span>
+                            </div>
+                            <div class="task-difficulty ${task.difficulty}">
+                                ${task.difficulty}
+                            </div>
+                        </div>
+                        <div class="task-body">
+                            <h3 class="task-title">${task.title}</h3>
+                            <p class="task-description">${task.description}</p>
+                            ${task.wisdom ? `
+                                <div class="task-wisdom">
+                                    <i class="fas fa-quote-left"></i>
+                                    <span class="wisdom-text">${task.wisdom}</span>
+                                </div>
+                            ` : ''}
+                            <div class="task-meta">
+                                <div class="task-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>${task.duration} minutes</span>
+                                </div>
+                                <div class="task-deadline">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span class="deadline-time" data-deadline="${task.deadline}">
+                                        ${this.formatTimeRemaining(task.deadline)}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            ${task.completed ? 
+                                '<button class="btn btn-success" disabled><i class="fas fa-check"></i> Completed</button>' :
+                                `<button class="btn btn-primary complete-task" data-task-id="${task.id}">
+                                    <i class="fas fa-play"></i> Start Task
+                                </button>`
+                            }
+                        </div>
+                    </div>
+                `).join('');
+
+                // Add event listeners for task completion
+                document.querySelectorAll('.complete-task').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const taskId = e.target.dataset.taskId || e.target.closest('button').dataset.taskId;
+                        this.completeTask(taskId);
+                    });
+                });
+            }
+
+            getCategoryIcon(category) {
+                const icons = {
+                    cognitive: 'fa-brain',
+                    creative: 'fa-palette',
+                    physical: 'fa-running',
+                    social: 'fa-users',
+                    learning: 'fa-graduation-cap',
+                    mindfulness: 'fa-leaf'
+                };
+                return icons[category] || 'fa-tasks';
+            }
+
+            formatTimeRemaining(deadline) {
+                const now = new Date();
+                const end = new Date(deadline);
+                const diff = end - now;
+
+                if (diff <= 0) {
+                    return 'Expired';
+                }
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                if (hours > 0) {
+                    return `${hours}h ${minutes}m`;
+                } else {
+                    return `${minutes}m`;
+                }
+            }
+
+            completeTask(taskId) {
+                const task = this.todaysTasks.find(t => t.id == taskId);
+                if (!task) return;
+
+                // Mark as completed
+                storage.completeTask(parseInt(taskId));
+                
+                // Update local state
+                task.completed = true;
+                task.completedAt = new Date().toISOString();
+
+                // Show completion modal
+                this.showCompletionModal(task);
+
+                // Refresh display
+                this.displayTodaysTasks();
+                this.updateStats();
+                this.updateCategoryStats();
+                this.loadCompletedTasks();
+            }
+
+            showCompletionModal(task) {
+                document.getElementById('completedTaskTitle').textContent = task.title;
+                document.getElementById('completedTaskMessage').textContent = 
+                    `Congratulations! You've completed "${task.title}" in the ${task.category} category.`;
+                
+                // Show modal
+                document.getElementById('completionModal').style.display = 'flex';
+                this.currentCompletedTask = task;
+            }
+
+            closeCompletionModal() {
+                document.getElementById('completionModal').style.display = 'none';
+                document.getElementById('taskReflection').value = '';
+                this.currentCompletedTask = null;
+            }
+
+            saveTaskReflection() {
+                const reflection = document.getElementById('taskReflection').value.trim();
+                
+                if (reflection && this.currentCompletedTask) {
+                    // Save reflection to the task
+                    const data = storage.getData();
+                    const task = data.dailyTasks.find(t => t.id === this.currentCompletedTask.id);
+                    if (task) {
+                        task.reflection = reflection;
+                        storage.saveData();
+                    }
+                    
+                    Utils.showNotification('Reflection saved successfully!', 'success');
+                }
+
+                this.closeCompletionModal();
+            }
+
+            updateStats() {
+                const data = storage.getData();
+                
+                document.getElementById('currentStreak').textContent = data.streak;
+                document.getElementById('totalCompleted').textContent = data.tasksCompleted;
+                
+                // Update time remaining for today's deadline
+                const now = new Date();
+                const endOfDay = new Date();
+                endOfDay.setHours(23, 59, 59, 999);
+                
+                const timeLeft = endOfDay - now;
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('timeRemaining').textContent = `${hours}h ${minutes}m`;
+            }
+
+            updateCategoryStats() {
+                const data = storage.getData();
+                const categoryCounts = {};
+                
+                data.dailyTasks.forEach(task => {
+                    if (task.completed) {
+                        categoryCounts[task.category] = (categoryCounts[task.category] || 0) + 1;
+                    }
+                });
+
+                Object.keys(categoryCounts).forEach(category => {
+                    const element = document.getElementById(`${category}-completed`);
+                    if (element) {
+                        element.textContent = categoryCounts[category];
+                    }
+                });
+            }
+
+            loadCompletedTasks() {
+                const data = storage.getData();
+                const completed = data.dailyTasks
+                    .filter(task => task.completed)
+                    .sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt))
+                    .slice(0, 10); // Show last 10 completed tasks
+
+                const container = document.getElementById('completedTasksList');
+                
+                if (completed.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-completed-tasks">
+                            <i class="fas fa-clock"></i>
+                            <p>No completed tasks yet. Start your first task above!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = completed.map(task => `
+                    <div class="completed-task-item">
+                        <div class="task-info">
+                            <div class="task-icon">
+                                <i class="fas ${this.getCategoryIcon(task.category)}"></i>
+                            </div>
+                            <div class="task-details">
+                                <h4>${task.title}</h4>
+                                <p class="task-meta">
+                                    <span class="category">${task.category}</span> • 
+                                    <span class="completed-time">${Utils.timeAgo(task.completedAt)}</span>
+                                </p>
+                                ${task.reflection ? `<p class="reflection">"${task.reflection}"</p>` : ''}
+                            </div>
+                        </div>
+                        <div class="task-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            startCountdown() {
+                // Update time remaining every minute
+                setInterval(() => {
+                    this.updateStats();
+                    
+                    // Update individual task countdowns
+                    document.querySelectorAll('.deadline-time').forEach(element => {
+                        const deadline = element.dataset.deadline;
+                        element.textContent = this.formatTimeRemaining(deadline);
+                    });
+                }, 60000); // Update every minute
+            }
+        }
+
+        // Initialize tasks page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname.includes('tasks.html')) {
+                new TasksPage();
+            }
+        });
+    </script>
+
+    <style>
+        /* Tasks page specific styles */
+        .tasks-section {
+            padding: 2rem 0 4rem;
+            min-height: 80vh;
+        }
+
+        .tasks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+            gap: 2rem;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .task-stats {
+            display: flex;
+            gap: 2rem;
+            flex-shrink: 0;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            min-width: 100px;
+        }
+
+        .stat-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-item label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .tasks-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .tasks-section-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .daily-tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .task-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .task-card.completed {
+            opacity: 0.7;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .task-category {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .task-difficulty {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .task-difficulty.easy {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .task-difficulty.medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+        }
+
+        .task-difficulty.hard {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .task-body {
+            padding: 0 1.5rem;
+        }
+
+        .task-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .task-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .task-wisdom {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1));
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            border-left: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .task-wisdom i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .wisdom-text {
+            color: var(--text-primary);
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .task-meta > div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .task-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .task-actions .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .category-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .category-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .category-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .category-stats {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .completed-tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .completed-task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .task-info .task-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-info .task-icon i {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .task-details h4 {
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .task-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .reflection {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .task-badge {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-badge i {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .no-tasks-message, .no-completed-tasks {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-tasks-message i, .no-completed-tasks i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .completion-celebration {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .celebration-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-color), #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .celebration-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .completion-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .completion-stats .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .reflection-section h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .tasks-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .task-stats {
+                justify-content: space-around;
+                gap: 1rem;
+            }
+
+            .daily-tasks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .task-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .completion-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>

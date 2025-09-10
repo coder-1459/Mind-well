@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>MindWell</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="assessment.html" class="active">Assessment</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="tasks.html">Daily Tasks</a></li>
+                <li><a href="mood.html">Mood Tracker</a></li>
+                <li><a href="appointments.html">Book Appointment</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="assessment-section">
+        <div class="container">
+            <div class="assessment-header">
+                <h1 class="section-title">Mental Health Assessment</h1>
+                <p class="section-description">
+                    Complete this comprehensive questionnaire to get insights into your current mental health status. 
+                    Your responses will help us calculate a personalized mental health score and provide tailored recommendations.
+                </p>
+            </div>
+
+            <!-- Assessment Form -->
+            <div class="form-container" id="assessmentContainer">
+                <div class="assessment-intro" id="assessmentIntro">
+                    <div class="intro-content">
+                        <div class="intro-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h2>Ready to Begin Your Assessment?</h2>
+                        <p>This assessment contains 10 carefully selected questions designed to evaluate different aspects of your mental well-being:</p>
+                        <ul class="assessment-features">
+                            <li><i class="fas fa-heart"></i> Mood and emotional state</li>
+                            <li><i class="fas fa-brain"></i> Anxiety and stress levels</li>
+                            <li><i class="fas fa-bed"></i> Sleep quality assessment</li>
+                            <li><i class="fas fa-users"></i> Social connections</li>
+                            <li><i class="fas fa-battery-three-quarters"></i> Energy and coping abilities</li>
+                            <li><i class="fas fa-smile"></i> Overall life satisfaction</li>
+                        </ul>
+                        <div class="assessment-notes">
+                            <div class="note">
+                                <i class="fas fa-clock"></i>
+                                <span>Estimated time: 3-5 minutes</span>
+                            </div>
+                            <div class="note">
+                                <i class="fas fa-lock"></i>
+                                <span>Your responses are private and stored locally</span>
+                            </div>
+                            <div class="note">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Get instant percentage-based results</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="startAssessment">Start Assessment</button>
+                    </div>
+                </div>
+
+                <div class="assessment-form" id="assessmentForm" style="display: none;">
+                    <div class="progress-header">
+                        <div class="progress-info">
+                            <span id="questionCounter">Question 1 of 10</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="assessmentProgress" style="width: 10%;"></div>
+                        </div>
+                    </div>
+
+                    <form id="mentalHealthForm">
+                        <div class="question-container" id="questionContainer">
+                            <!-- Questions will be dynamically inserted here -->
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary" id="prevButton" style="display: none;">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextButton">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitButton" style="display: none;">
+                                <i class="fas fa-check"></i> Complete Assessment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="assessment-results" id="assessmentResults" style="display: none;">
+                    <div class="results-header">
+                        <div class="score-circle">
+                            <div class="score-content">
+                                <span class="score-number" id="finalScore">--</span>
+                                <span class="score-label">%</span>
+                            </div>
+                        </div>
+                        <h2>Your Mental Health Score</h2>
+                        <p class="score-interpretation" id="scoreInterpretation">--</p>
+                    </div>
+
+                    <div class="category-breakdown">
+                        <h3>Detailed Breakdown</h3>
+                        <div class="category-scores" id="categoryScores">
+                            <!-- Category scores will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h3>Recommended Next Steps</h3>
+                        <div class="recommendation-cards" id="recommendationCards">
+                            <!-- Recommendations will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <a href="dashboard.html" class="btn btn-primary">
+                            <i class="fas fa-chart-area"></i> View Dashboard
+                        </a>
+                        <a href="tasks.html" class="btn btn-secondary">
+                            <i class="fas fa-tasks"></i> Start Daily Tasks
+                        </a>
+                        <button class="btn btn-secondary" id="retakeAssessment">
+                            <i class="fas fa-redo"></i> Retake Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindWell</h3>
+                    <p>Your companion for mental wellness and cognitive growth</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="assessment.html">Take Assessment</a></li>
+                        <li><a href="tasks.html">Daily Tasks</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Tips</a></li>
+                        <li><a href="#">Emergency Helpline</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindWell. Created with care for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize theme manager for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.themeManager) {
+                window.themeManager = new ThemeManager();
+            }
+        });
+        // Assessment Page Functionality
+        class AssessmentPage {
+            constructor() {
+                this.assessment = new MentalHealthAssessment();
+                this.currentQuestionIndex = 0;
+                this.answers = [];
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                document.getElementById('startAssessment').addEventListener('click', () => {
+                    this.startAssessment();
+                });
+
+                document.getElementById('nextButton').addEventListener('click', () => {
+                    this.nextQuestion();
+                });
+
+                document.getElementById('prevButton').addEventListener('click', () => {
+                    this.prevQuestion();
+                });
+
+                document.getElementById('mentalHealthForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.submitAssessment();
+                });
+
+                document.getElementById('retakeAssessment').addEventListener('click', () => {
+                    this.resetAssessment();
+                });
+            }
+
+            startAssessment() {
+                document.getElementById('assessmentIntro').style.display = 'none';
+                document.getElementById('assessmentForm').style.display = 'block';
+                this.showQuestion(0);
+            }
+
+            showQuestion(index) {
+                const question = this.assessment.questions[index];
+                const container = document.getElementById('questionContainer');
+                
+                container.innerHTML = `
+                    <div class="question-card fade-in">
+                        <h3 class="question-title">
+                            <span class="question-number">${index + 1}.</span>
+                            ${question.question}
+                        </h3>
+                        <div class="options-container">
+                            ${question.options.map((option, optionIndex) => `
+                                <label class="option-label">
+                                    <input type="radio" name="question_${question.id}" value="${option.value}" 
+                                           data-text="${option.text}" ${this.answers[index] && this.answers[index].value === option.value ? 'checked' : ''}>
+                                    <div class="option-content">
+                                        <div class="option-radio"></div>
+                                        <span class="option-text">${option.text}</span>
+                                    </div>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // Update progress
+                const progress = ((index + 1) / this.assessment.questions.length) * 100;
+                document.getElementById('assessmentProgress').style.width = `${progress}%`;
+                document.getElementById('questionCounter').textContent = `Question ${index + 1} of ${this.assessment.questions.length}`;
+
+                // Update navigation buttons
+                document.getElementById('prevButton').style.display = index > 0 ? 'block' : 'none';
+                document.getElementById('nextButton').style.display = index < this.assessment.questions.length - 1 ? 'block' : 'none';
+                document.getElementById('submitButton').style.display = index === this.assessment.questions.length - 1 ? 'block' : 'none';
+
+                this.currentQuestionIndex = index;
+            }
+
+            nextQuestion() {
+                if (this.saveCurrentAnswer()) {
+                    if (this.currentQuestionIndex < this.assessment.questions.length - 1) {
+                        this.showQuestion(this.currentQuestionIndex + 1);
+                    }
+                } else {
+                    Utils.showNotification('Please select an answer before proceeding', 'error');
+                }
+            }
+
+            prevQuestion() {
+                if (this.currentQuestionIndex > 0) {
+                    this.showQuestion(this.currentQuestionIndex - 1);
+                }
+            }
+
+            saveCurrentAnswer() {
+                const radioButtons = document.querySelectorAll(`input[name="question_${this.assessment.questions[this.currentQuestionIndex].id}"]`);
+                const selected = Array.from(radioButtons).find(radio => radio.checked);
+                
+                if (selected) {
+                    this.answers[this.currentQuestionIndex] = {
+                        questionId: this.assessment.questions[this.currentQuestionIndex].id,
+                        value: parseInt(selected.value),
+                        text: selected.dataset.text,
+                        category: this.assessment.questions[this.currentQuestionIndex].category
+                    };
+                    return true;
+                }
+                return false;
+            }
+
+            submitAssessment() {
+                if (this.saveCurrentAnswer()) {
+                    if (this.answers.length === this.assessment.questions.length) {
+                        this.calculateAndShowResults();
+                    } else {
+                        Utils.showNotification('Please answer all questions', 'error');
+                    }
+                } else {
+                    Utils.showNotification('Please select an answer for the current question', 'error');
+                }
+            }
+
+            calculateAndShowResults() {
+                const results = this.assessment.calculateScore(this.answers);
+                
+                // Save assessment to storage
+                storage.addAssessment({
+                    score: results.score,
+                    totalScore: results.totalScore,
+                    maxPossibleScore: results.maxPossibleScore,
+                    interpretation: results.interpretation,
+                    categoryScores: results.categoryScores,
+                    answers: this.answers
+                });
+
+                // Show results
+                document.getElementById('assessmentForm').style.display = 'none';
+                document.getElementById('assessmentResults').style.display = 'block';
+
+                this.displayResults(results);
+                Utils.showNotification('Assessment completed successfully!', 'success');
+            }
+
+            displayResults(results) {
+                // Display main score
+                document.getElementById('finalScore').textContent = results.score;
+                document.getElementById('scoreInterpretation').textContent = results.interpretation;
+
+                // Set score circle color based on score
+                const scoreCircle = document.querySelector('.score-circle');
+                if (results.score >= 80) {
+                    scoreCircle.style.background = `conic-gradient(var(--secondary-color) ${results.score * 3.6}deg, var(--bg-secondary) 0deg)`;
+                } else if (results.score >= 60) {
+                    scoreCircle.style.background = `conic-gradient(var(--accent-color) ${results.score * 3.6}deg, var(--bg-secondary) 0deg)`;
+                } else {
+                    scoreCircle.style.background = `conic-gradient(var(--danger-color) ${results.score * 3.6}deg, var(--bg-secondary) 0deg)`;
+                }
+
+                // Display category breakdown
+                this.displayCategoryScores(results.categoryScores);
+
+                // Display recommendations
+                this.displayRecommendations(results.score);
+            }
+
+            displayCategoryScores(categoryScores) {
+                const container = document.getElementById('categoryScores');
+                const categoryNames = {
+                    mood: 'Mood & Emotions',
+                    anxiety: 'Anxiety Levels',
+                    stress: 'Stress Management',
+                    sleep: 'Sleep Quality',
+                    social: 'Social Connections',
+                    energy: 'Energy Levels',
+                    coping: 'Coping Skills',
+                    overall: 'Life Satisfaction'
+                };
+
+                const categoryIcons = {
+                    mood: 'fas fa-heart',
+                    anxiety: 'fas fa-brain',
+                    stress: 'fas fa-weight-hanging',
+                    sleep: 'fas fa-bed',
+                    social: 'fas fa-users',
+                    energy: 'fas fa-battery-three-quarters',
+                    coping: 'fas fa-shield-alt',
+                    overall: 'fas fa-smile'
+                };
+
+                container.innerHTML = Object.keys(categoryScores).map(category => `
+                    <div class="category-item">
+                        <div class="category-header">
+                            <i class="${categoryIcons[category]}"></i>
+                            <span class="category-name">${categoryNames[category]}</span>
+                            <span class="category-score">${categoryScores[category].percentage}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${categoryScores[category].percentage}%"></div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            displayRecommendations(score) {
+                const container = document.getElementById('recommendationCards');
+                let recommendations = [];
+
+                if (score >= 80) {
+                    recommendations = [
+                        {
+                            icon: 'fas fa-trophy',
+                            title: 'Keep Up the Great Work!',
+                            description: 'Your mental health is in excellent condition. Continue your positive habits and daily tasks to maintain this level.',
+                            action: 'Continue Daily Tasks'
+                        },
+                        {
+                            icon: 'fas fa-users',
+                            title: 'Share Your Success',
+                            description: 'Consider helping others on their mental health journey by sharing your positive experiences.',
+                            action: 'Help Others'
+                        }
+                    ];
+                } else if (score >= 60) {
+                    recommendations = [
+                        {
+                            icon: 'fas fa-tasks',
+                            title: 'Boost with Daily Tasks',
+                            description: 'Your mental health is good, but there\'s room for improvement. Try our daily cognitive tasks.',
+                            action: 'Start Daily Tasks'
+                        },
+                        {
+                            icon: 'fas fa-smile',
+                            title: 'Track Your Mood',
+                            description: 'Regular mood tracking can help you identify patterns and improve your emotional well-being.',
+                            action: 'Start Mood Tracking'
+                        }
+                    ];
+                } else if (score >= 40) {
+                    recommendations = [
+                        {
+                            icon: 'fas fa-phone',
+                            title: 'Consider Professional Support',
+                            description: 'Your mental health could benefit from professional guidance. Consider booking an appointment.',
+                            action: 'Book Appointment'
+                        },
+                        {
+                            icon: 'fas fa-tasks',
+                            title: 'Start Gradual Improvement',
+                            description: 'Begin with simple daily tasks designed to boost your mood and cognitive function.',
+                            action: 'Gentle Daily Tasks'
+                        }
+                    ];
+                } else {
+                    recommendations = [
+                        {
+                            icon: 'fas fa-user-md',
+                            title: 'Seek Professional Help',
+                            description: 'Your results suggest you would benefit significantly from professional mental health support.',
+                            action: 'Book Appointment Now',
+                            urgent: true
+                        },
+                        {
+                            icon: 'fas fa-phone-alt',
+                            title: 'Crisis Resources',
+                            description: 'If you\'re experiencing thoughts of self-harm, please reach out to a mental health crisis line immediately.',
+                            action: 'Get Help Now',
+                            urgent: true
+                        }
+                    ];
+                }
+
+                container.innerHTML = recommendations.map(rec => `
+                    <div class="recommendation-card ${rec.urgent ? 'urgent' : ''}">
+                        <div class="recommendation-icon">
+                            <i class="${rec.icon}"></i>
+                        </div>
+                        <div class="recommendation-content">
+                            <h4>${rec.title}</h4>
+                            <p>${rec.description}</p>
+                            <button class="btn btn-sm ${rec.urgent ? 'btn-danger' : 'btn-primary'}">${rec.action}</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            resetAssessment() {
+                this.currentQuestionIndex = 0;
+                this.answers = [];
+                document.getElementById('assessmentResults').style.display = 'none';
+                document.getElementById('assessmentIntro').style.display = 'block';
+            }
+        }
+
+        // Initialize assessment page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname.includes('assessment.html')) {
+                new AssessmentPage();
+            }
+        });
+    </script>
+
+    <style>
+        /* Assessment-specific styles */
+        .assessment-section {
+            padding: 2rem 0 4rem;
+            min-height: 80vh;
+        }
+
+        .assessment-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .assessment-intro {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .intro-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .intro-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .assessment-features {
+            list-style: none;
+            max-width: 400px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+
+        .assessment-features li {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .assessment-features i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .assessment-notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .note {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .progress-header {
+            margin-bottom: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .question-title {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .question-number {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-label {
+            cursor: pointer;
+            display: block;
+        }
+
+        .option-label input[type="radio"] {
+            display: none;
+        }
+
+        .option-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            background: var(--bg-primary);
+        }
+
+        .option-content:hover {
+            border-color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .option-label input[type="radio"]:checked + .option-content {
+            border-color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .option-label input[type="radio"]:checked + .option-content .option-radio {
+            border-color: var(--primary-color);
+        }
+
+        .option-label input[type="radio"]:checked + .option-content .option-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            position: relative;
+            background: conic-gradient(var(--primary-color) 0deg, var(--bg-secondary) 0deg);
+        }
+
+        .score-content {
+            background: var(--bg-primary);
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .score-interpretation {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .category-breakdown {
+            margin-bottom: 3rem;
+        }
+
+        .category-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-name {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .category-score {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .recommendations {
+            margin-bottom: 3rem;
+        }
+
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .recommendation-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .recommendation-card.urgent {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .recommendation-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            flex-shrink: 0;
+        }
+
+        .recommendation-card.urgent .recommendation-icon {
+            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+        }
+
+        .recommendation-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .recommendation-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .recommendation-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .assessment-intro {
+                padding: 2rem 1rem;
+            }
+            
+            .assessment-notes {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .form-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .results-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .results-actions .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</body>
+</html>

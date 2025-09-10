@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>MindWell</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="tasks.html">Daily Tasks</a></li>
+                <li><a href="mood.html">Mood Tracker</a></li>
+                <li><a href="appointments.html" class="active">Book Appointment</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="appointments-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="appointments-header">
+                <h1 class="section-title">Book Appointment with a Psychologist</h1>
+                <p class="section-description">
+                    Connect with qualified mental health professionals for counseling and support. 
+                    Our network of licensed psychologists is here to help you on your mental wellness journey.
+                </p>
+            </div>
+
+            <!-- Professional Support Information -->
+            <div class="support-info-section">
+                <div class="support-cards">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Licensed Professionals</h3>
+                        <p>All our psychologists are licensed and experienced in various mental health specialties</p>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Flexible Sessions</h3>
+                        <p>Choose between in-person, video call, or phone consultations based on your preference</p>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Confidential & Safe</h3>
+                        <p>All sessions are completely confidential with the highest privacy standards</p>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Available 24/7</h3>
+                        <p>Crisis support available round the clock, with regular appointments during business hours</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointment Booking Form -->
+            <div class="booking-container">
+                <div class="booking-form-container">
+                    <div class="form-header">
+                        <h2><i class="fas fa-calendar-plus"></i> Book Your Appointment</h2>
+                        <p>Fill out this form and we'll connect you with the right mental health professional</p>
+                    </div>
+
+                    <form id="appointmentForm" class="appointment-form">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" class="form-control" min="13" max="120">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender (Optional)</label>
+                                    <select id="gender" class="form-control">
+                                        <option value="">Prefer not to say</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="non-binary">Non-binary</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Preferences -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-cog"></i> Appointment Preferences</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="sessionType">Preferred Session Type *</label>
+                                    <select id="sessionType" class="form-control" required>
+                                        <option value="">Select session type</option>
+                                        <option value="video">Video Call</option>
+                                        <option value="phone">Phone Call</option>
+                                        <option value="in-person">In-Person</option>
+                                        <option value="chat">Text Chat</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="urgency">Urgency Level *</label>
+                                    <select id="urgency" class="form-control" required>
+                                        <option value="">Select urgency</option>
+                                        <option value="crisis">Crisis - Need immediate help</option>
+                                        <option value="urgent">Urgent - Within 24 hours</option>
+                                        <option value="soon">Soon - Within a week</option>
+                                        <option value="routine">Routine - Within 2 weeks</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="specialization">Preferred Specialization</label>
+                                <select id="specialization" class="form-control">
+                                    <option value="">No preference</option>
+                                    <option value="anxiety">Anxiety Disorders</option>
+                                    <option value="depression">Depression</option>
+                                    <option value="trauma">Trauma & PTSD</option>
+                                    <option value="relationships">Relationship Issues</option>
+                                    <option value="addiction">Addiction & Substance Abuse</option>
+                                    <option value="eating">Eating Disorders</option>
+                                    <option value="grief">Grief & Loss</option>
+                                    <option value="stress">Stress Management</option>
+                                    <option value="family">Family Therapy</option>
+                                    <option value="teens">Teen & Adolescent</option>
+                                    <option value="general">General Counseling</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Scheduling -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar"></i> Preferred Schedule</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="preferredDate">Preferred Date</label>
+                                    <input type="date" id="preferredDate" class="form-control" min="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredTime">Preferred Time</label>
+                                    <select id="preferredTime" class="form-control">
+                                        <option value="">Any time</option>
+                                        <option value="morning">Morning (8 AM - 12 PM)</option>
+                                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                                        <option value="evening">Evening (5 PM - 8 PM)</option>
+                                        <option value="weekend">Weekends</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mental Health Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-heart"></i> Mental Health Information</h3>
+                            <div class="form-group">
+                                <label for="currentConcerns">What would you like help with? *</label>
+                                <textarea id="currentConcerns" class="form-control" rows="4" required 
+                                    placeholder="Please describe what's bringing you to seek counseling today. This helps us match you with the right professional."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="previousTherapy">Have you had therapy before?</label>
+                                    <select id="previousTherapy" class="form-control">
+                                        <option value="">Select an option</option>
+                                        <option value="never">Never</option>
+                                        <option value="past">Yes, in the past</option>
+                                        <option value="current">Currently in therapy</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medication">Are you currently taking any medication?</label>
+                                    <select id="medication" class="form-control">
+                                        <option value="">Select an option</option>
+                                        <option value="none">No medication</option>
+                                        <option value="mental-health">Yes, for mental health</option>
+                                        <option value="other">Yes, for other conditions</option>
+                                        <option value="both">Yes, for both</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance & Payment -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-credit-card"></i> Payment Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="insurance">Insurance Provider</label>
+                                    <select id="insurance" class="form-control">
+                                        <option value="">No insurance / Self-pay</option>
+                                        <option value="anthem">Anthem</option>
+                                        <option value="aetna">Aetna</option>
+                                        <option value="cigna">Cigna</option>
+                                        <option value="united">United Healthcare</option>
+                                        <option value="bcbs">Blue Cross Blue Shield</option>
+                                        <option value="kaiser">Kaiser Permanente</option>
+                                        <option value="humana">Humana</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentMethod">Preferred Payment Method</label>
+                                    <select id="paymentMethod" class="form-control">
+                                        <option value="insurance">Use Insurance</option>
+                                        <option value="credit">Credit/Debit Card</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="hsa">HSA/FSA</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
+                            <div class="form-group">
+                                <label for="additionalNotes">Additional Notes or Special Requests</label>
+                                <textarea id="additionalNotes" class="form-control" rows="3" 
+                                    placeholder="Any additional information, accessibility needs, or special requests..."></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="emergencyContact" class="form-checkbox">
+                                    <span class="checkmark"></span>
+                                    I give permission to contact me in case of emergency
+                                </label>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="termsAgreement" class="form-checkbox" required>
+                                    <span class="checkmark"></span>
+                                    I agree to the terms of service and privacy policy *
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="clearForm">Clear Form</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calendar-check"></i> Submit Appointment Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Summary Sidebar -->
+                <div class="booking-sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-clock"></i> What to Expect</h3>
+                        <div class="expectation-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Submit Request</h4>
+                                    <p>Complete and submit your appointment request form</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Professional Matching</h4>
+                                    <p>We'll match you with the best-suited mental health professional</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Confirmation Call</h4>
+                                    <p>Expect a call within 24 hours to confirm your appointment</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Your Session</h4>
+                                    <p>Attend your session and begin your healing journey</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-shield-alt"></i> Privacy & Safety</h3>
+                        <ul class="privacy-features">
+                            <li><i class="fas fa-lock"></i> HIPAA Compliant</li>
+                            <li><i class="fas fa-user-shield"></i> End-to-End Encryption</li>
+                            <li><i class="fas fa-eye-slash"></i> No Session Recording</li>
+                            <li><i class="fas fa-certificate"></i> Licensed Professionals Only</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card crisis-info">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Need Immediate Help?</h3>
+                        <p>If you're experiencing a mental health crisis, please contact:</p>
+                        <div class="crisis-contacts">
+                            <div class="crisis-contact">
+                                <strong>National Suicide Prevention Lifeline</strong>
+                                <a href="tel:988">988</a>
+                            </div>
+                            <div class="crisis-contact">
+                                <strong>Crisis Text Line</strong>
+                                <a href="sms:741741">Text HOME to 741741</a>
+                            </div>
+                            <div class="crisis-contact">
+                                <strong>Emergency Services</strong>
+                                <a href="tel:911">911</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Appointments Section -->
+            <div class="my-appointments-section">
+                <h2 class="section-title">My Appointments</h2>
+                <div class="appointments-list" id="appointmentsList">
+                    <!-- Appointments will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindWell</h3>
+                    <p>Your companion for mental wellness and cognitive growth</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="assessment.html">Take Assessment</a></li>
+                        <li><a href="tasks.html">Daily Tasks</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Tips</a></li>
+                        <li><a href="#">Emergency Helpline</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindWell. Created with care for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize theme manager for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.themeManager) {
+                window.themeManager = new ThemeManager();
+            }
+        });
+        class AppointmentBooking {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setMinDate();
+                this.bindEvents();
+                this.loadMyAppointments();
+            }
+
+            setMinDate() {
+                // Set minimum date to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('preferredDate').setAttribute('min', today);
+            }
+
+            bindEvents() {
+                // Form submission
+                document.getElementById('appointmentForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.submitAppointmentRequest();
+                });
+
+                // Clear form
+                document.getElementById('clearForm').addEventListener('click', () => {
+                    this.clearForm();
+                });
+
+                // Form validation
+                document.querySelectorAll('.form-control').forEach(input => {
+                    input.addEventListener('blur', (e) => {
+                        this.validateField(e.target);
+                    });
+                });
+
+                // Urgency change handler
+                document.getElementById('urgency').addEventListener('change', (e) => {
+                    this.handleUrgencyChange(e.target.value);
+                });
+            }
+
+            validateField(field) {
+                const value = field.value.trim();
+                const isRequired = field.hasAttribute('required');
+                
+                // Remove previous error state
+                field.classList.remove('error');
+                const existingError = field.parentNode.querySelector('.field-error');
+                if (existingError) {
+                    existingError.remove();
+                }
+
+                // Check required fields
+                if (isRequired && !value) {
+                    this.showFieldError(field, 'This field is required');
+                    return false;
+                }
+
+                // Email validation
+                if (field.type === 'email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        this.showFieldError(field, 'Please enter a valid email address');
+                        return false;
+                    }
+                }
+
+                // Phone validation
+                if (field.type === 'tel' && value) {
+                    const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+                    if (!phoneRegex.test(value) || value.length < 10) {
+                        this.showFieldError(field, 'Please enter a valid phone number');
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            showFieldError(field, message) {
+                field.classList.add('error');
+                const errorElement = document.createElement('div');
+                errorElement.className = 'field-error';
+                errorElement.textContent = message;
+                field.parentNode.appendChild(errorElement);
+            }
+
+            handleUrgencyChange(urgency) {
+                const crisisInfo = document.querySelector('.crisis-info');
+                if (urgency === 'crisis') {
+                    crisisInfo.style.display = 'block';
+                    crisisInfo.scrollIntoView({ behavior: 'smooth' });
+                    Utils.showNotification('For immediate crisis support, please use the emergency contacts in the sidebar', 'info');
+                }
+            }
+
+            submitAppointmentRequest() {
+                // Validate all required fields
+                const requiredFields = document.querySelectorAll('.form-control[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
+
+                // Check terms agreement
+                const termsCheckbox = document.getElementById('termsAgreement');
+                if (!termsCheckbox.checked) {
+                    Utils.showNotification('Please agree to the terms of service and privacy policy', 'error');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    Utils.showNotification('Please correct the errors in the form', 'error');
+                    return;
+                }
+
+                // Collect form data
+                const appointmentData = {
+                    personalInfo: {
+                        firstName: document.getElementById('firstName').value.trim(),
+                        lastName: document.getElementById('lastName').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                        age: document.getElementById('age').value,
+                        gender: document.getElementById('gender').value
+                    },
+                    preferences: {
+                        sessionType: document.getElementById('sessionType').value,
+                        urgency: document.getElementById('urgency').value,
+                        specialization: document.getElementById('specialization').value,
+                        preferredDate: document.getElementById('preferredDate').value,
+                        preferredTime: document.getElementById('preferredTime').value
+                    },
+                    mentalHealth: {
+                        currentConcerns: document.getElementById('currentConcerns').value.trim(),
+                        previousTherapy: document.getElementById('previousTherapy').value,
+                        medication: document.getElementById('medication').value
+                    },
+                    payment: {
+                        insurance: document.getElementById('insurance').value,
+                        paymentMethod: document.getElementById('paymentMethod').value
+                    },
+                    additional: {
+                        notes: document.getElementById('additionalNotes').value.trim(),
+                        emergencyContact: document.getElementById('emergencyContact').checked
+                    },
+                    status: 'pending',
+                    submissionDate: new Date().toISOString()
+                };
+
+                // Save appointment request
+                storage.addAppointment(appointmentData);
+
+                // Show success message
+                this.showSuccessModal(appointmentData);
+
+                // Clear form
+                this.clearForm();
+
+                // Reload appointments
+                this.loadMyAppointments();
+            }
+
+            showSuccessModal(appointmentData) {
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay success-modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3><i class="fas fa-check-circle"></i> Appointment Request Submitted</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="success-message">
+                                <div class="success-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h4>Thank you, ${appointmentData.personalInfo.firstName}!</h4>
+                                <p>Your appointment request has been successfully submitted. Here's what happens next:</p>
+                                <div class="next-steps">
+                                    <div class="next-step">
+                                        <i class="fas fa-phone"></i>
+                                        <span>We'll call you within 24 hours to confirm your appointment</span>
+                                    </div>
+                                    <div class="next-step">
+                                        <i class="fas fa-user-md"></i>
+                                        <span>We'll match you with the right mental health professional</span>
+                                    </div>
+                                    <div class="next-step">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>You'll receive confirmation details via email</span>
+                                    </div>
+                                </div>
+                                ${appointmentData.preferences.urgency === 'crisis' ? 
+                                    '<div class="crisis-reminder"><strong>Crisis Support:</strong> If you need immediate help, please contact the emergency numbers provided.</div>' : ''
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').remove()">
+                                <i class="fas fa-check"></i> Got it
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+
+                // Auto-remove after 10 seconds
+                setTimeout(() => {
+                    if (document.body.contains(modal)) {
+                        document.body.removeChild(modal);
+                    }
+                }, 10000);
+            }
+
+            clearForm() {
+                document.getElementById('appointmentForm').reset();
+                
+                // Remove error states
+                document.querySelectorAll('.form-control.error').forEach(field => {
+                    field.classList.remove('error');
+                });
+                
+                document.querySelectorAll('.field-error').forEach(error => {
+                    error.remove();
+                });
+
+                // Reset min date
+                this.setMinDate();
+            }
+
+            loadMyAppointments() {
+                const data = storage.getData();
+                const appointments = data.appointments.sort((a, b) => 
+                    new Date(b.submissionDate) - new Date(a.submissionDate)
+                );
+
+                const container = document.getElementById('appointmentsList');
+
+                if (appointments.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-appointments">
+                            <i class="fas fa-calendar-plus"></i>
+                            <h3>No appointments yet</h3>
+                            <p>Your appointment requests will appear here once you submit them.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = appointments.map(appointment => `
+                    <div class="appointment-card">
+                        <div class="appointment-header">
+                            <div class="appointment-status ${appointment.status}">
+                                <i class="fas ${this.getStatusIcon(appointment.status)}"></i>
+                                ${appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                            </div>
+                            <div class="appointment-date">
+                                Submitted: ${Utils.formatDate(appointment.submissionDate)}
+                            </div>
+                        </div>
+                        <div class="appointment-body">
+                            <div class="appointment-info">
+                                <h4>${appointment.personalInfo.firstName} ${appointment.personalInfo.lastName}</h4>
+                                <div class="appointment-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-video"></i>
+                                        <span>${this.getSessionTypeText(appointment.preferences.sessionType)}</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <span>${this.getUrgencyText(appointment.preferences.urgency)}</span>
+                                    </div>
+                                    ${appointment.preferences.specialization ? `
+                                        <div class="detail-item">
+                                            <i class="fas fa-brain"></i>
+                                            <span>${this.getSpecializationText(appointment.preferences.specialization)}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${appointment.preferences.preferredDate ? `
+                                        <div class="detail-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>Preferred: ${Utils.formatDate(appointment.preferences.preferredDate)}</span>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                <div class="appointment-concerns">
+                                    <p>"${appointment.mentalHealth.currentConcerns}"</p>
+                                </div>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-sm btn-secondary" onclick="window.open('tel:${appointment.personalInfo.phone}')">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                                <button class="btn btn-sm btn-secondary" onclick="window.open('mailto:${appointment.personalInfo.email}')">
+                                    <i class="fas fa-envelope"></i> Email
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getStatusIcon(status) {
+                const icons = {
+                    pending: 'fa-clock',
+                    confirmed: 'fa-check-circle',
+                    scheduled: 'fa-calendar-check',
+                    completed: 'fa-check-double',
+                    cancelled: 'fa-times-circle'
+                };
+                return icons[status] || 'fa-question-circle';
+            }
+
+            getSessionTypeText(type) {
+                const types = {
+                    video: 'Video Call',
+                    phone: 'Phone Call',
+                    'in-person': 'In-Person',
+                    chat: 'Text Chat'
+                };
+                return types[type] || type;
+            }
+
+            getUrgencyText(urgency) {
+                const urgencies = {
+                    crisis: 'Crisis - Immediate Help',
+                    urgent: 'Urgent - Within 24 hours',
+                    soon: 'Soon - Within a week',
+                    routine: 'Routine - Within 2 weeks'
+                };
+                return urgencies[urgency] || urgency;
+            }
+
+            getSpecializationText(spec) {
+                const specs = {
+                    anxiety: 'Anxiety Disorders',
+                    depression: 'Depression',
+                    trauma: 'Trauma & PTSD',
+                    relationships: 'Relationship Issues',
+                    addiction: 'Addiction & Substance Abuse',
+                    eating: 'Eating Disorders',
+                    grief: 'Grief & Loss',
+                    stress: 'Stress Management',
+                    family: 'Family Therapy',
+                    teens: 'Teen & Adolescent',
+                    general: 'General Counseling'
+                };
+                return specs[spec] || spec;
+            }
+        }
+
+        // Initialize appointment booking
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname.includes('appointments.html')) {
+                new AppointmentBooking();
+            }
+        });
+    </script>
+
+    <style>
+        /* Appointments specific styles */
+        .appointments-section {
+            padding: 2rem 0 4rem;
+            min-height: 80vh;
+        }
+
+        .appointments-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .support-info-section {
+            margin-bottom: 4rem;
+        }
+
+        .support-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .support-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .support-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .support-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .support-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .support-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .booking-form-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+        }
+
+        .appointment-form {
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control.error {
+            border-color: var(--danger-color);
+            background-color: rgba(239, 68, 68, 0.05);
+        }
+
+        .field-error {
+            color: var(--danger-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .field-error::before {
+            content: '⚠';
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .form-checkbox {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: var(--primary-color);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .booking-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .expectation-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .privacy-features {
+            list-style: none;
+        }
+
+        .privacy-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .privacy-features i {
+            color: var(--secondary-color);
+            width: 16px;
+        }
+
+        .crisis-info {
+            border-left: 4px solid var(--danger-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .crisis-contacts {
+            margin-top: 1rem;
+        }
+
+        .crisis-contact {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .crisis-contact strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .crisis-contact a {
+            color: var(--danger-color);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .crisis-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .my-appointments-section {
+            margin-top: 4rem;
+        }
+
+        .appointments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .appointment-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .appointment-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .appointment-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .appointment-status.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+        }
+
+        .appointment-status.confirmed {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .appointment-status.scheduled {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+        }
+
+        .appointment-status.completed {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .appointment-status.cancelled {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .appointment-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .appointment-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.5rem;
+            gap: 1rem;
+        }
+
+        .appointment-info {
+            flex: 1;
+        }
+
+        .appointment-info h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .appointment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .detail-item i {
+            width: 16px;
+            color: var(--primary-color);
+        }
+
+        .appointment-concerns {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .appointment-concerns p {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin: 0;
+        }
+
+        .appointment-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .no-appointments {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-appointments i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .no-appointments h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Success Modal */
+        .success-modal .modal-content {
+            max-width: 500px;
+        }
+
+        .success-message {
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .success-message h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .next-steps {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .next-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+        }
+
+        .next-step i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .crisis-reminder {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius);
+            color: var(--danger-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .support-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-details {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-body {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .appointment-actions {
+                flex-direction: row;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .appointment-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .support-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .expectation-steps {
+                gap: 1rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</body>
+</html>

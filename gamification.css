@@ -1,0 +1,658 @@
+/* Gamification System Styles - Positive Reinforcement Design */
+
+/* ============================================ */
+/*              CELEBRATION NOTIFICATIONS       */
+/* ============================================ */
+
+.celebration-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.celebration-notification.celebration-show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.celebration-notification.celebration-hide {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+}
+
+.celebration-content {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+    text-align: center;
+    min-width: 280px;
+    position: relative;
+    overflow: hidden;
+}
+
+.celebration-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.celebration-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    animation: bounce 0.6s ease infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.celebration-message {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.celebration-xp {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.celebration-level {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* ============================================ */
+/*              LEVEL UP MODAL                  */
+/* ============================================ */
+
+.level-up-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.level-up-modal.show {
+    opacity: 1;
+}
+
+.level-up-content {
+    background: linear-gradient(135deg, var(--bg-card), rgba(99, 102, 241, 0.1));
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.level-up-content::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    border-radius: var(--radius-lg);
+    z-index: -1;
+    animation: borderGlow 2s ease infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.level-up-animation h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.level-up-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: levelUpPulse 1s ease infinite;
+}
+
+@keyframes levelUpPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.level-progression {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.old-level {
+    padding: 0.5rem 1rem;
+    background: rgba(107, 114, 128, 0.2);
+    border-radius: var(--radius);
+    color: var(--text-secondary);
+}
+
+.level-arrow {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    animation: arrowPulse 1s ease infinite;
+}
+
+@keyframes arrowPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+.new-level {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: var(--radius);
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.level-reward {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: var(--radius);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.level-reward h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.level-progress {
+    margin: 2rem 0;
+}
+
+.progress-text {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* ============================================ */
+/*              ACHIEVEMENT NOTIFICATIONS       */
+/* ============================================ */
+
+.achievement-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 10002;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.achievement-notification.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.achievement-notification.hide {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.achievement-content {
+    background: var(--bg-card);
+    border: 3px solid;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    min-width: 320px;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.achievement-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    animation: achievementGlow 3s ease infinite;
+}
+
+@keyframes achievementGlow {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.achievement-rarity {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+}
+
+.achievement-rarity.common { background: #22c55e; color: white; }
+.achievement-rarity.uncommon { background: #3b82f6; color: white; }
+.achievement-rarity.rare { background: #8b5cf6; color: white; }
+.achievement-rarity.epic { background: #f59e0b; color: white; }
+.achievement-rarity.legendary { background: #ef4444; color: white; }
+.achievement-rarity.mythic { 
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    color: white;
+    animation: rarityShine 2s ease infinite;
+}
+
+@keyframes rarityShine {
+    0%, 100% { box-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.8); }
+}
+
+.achievement-close {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    line-height: 1;
+}
+
+.achievement-close:hover {
+    color: var(--danger-color);
+    transform: scale(1.2);
+}
+
+.achievement-icon {
+    font-size: 4rem;
+    margin: 1rem 0;
+    animation: achievementFloat 2s ease infinite;
+}
+
+@keyframes achievementFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.achievement-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.achievement-description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.achievement-reward {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.achievement-celebration {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    animation: celebrationPulse 1s ease infinite;
+}
+
+@keyframes celebrationPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ============================================ */
+/*              GARDEN GROWTH NOTIFICATIONS     */
+/* ============================================ */
+
+.garden-growth-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease;
+}
+
+.garden-growth-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.garden-growth-content {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+    text-align: center;
+    min-width: 250px;
+}
+
+.garden-growth-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    animation: gardenGrow 0.8s ease;
+}
+
+@keyframes gardenGrow {
+    0% { transform: scale(0) rotate(-180deg); }
+    50% { transform: scale(1.3) rotate(-90deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.garden-growth-message {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.garden-happiness {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fbbf24;
+}
+
+/* ============================================ */
+/*              PROGRESS WIDGETS                */
+/* ============================================ */
+
+.gamification-widget {
+    background: linear-gradient(135deg, var(--bg-card), rgba(99, 102, 241, 0.05));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.gamification-widget:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.widget-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.widget-level {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.progress-section {
+    margin: 1rem 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.xp-display {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+    transition: width 0.8s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShine 2s ease infinite;
+}
+
+@keyframes progressShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.achievement-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.achievement-count {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.garden-happiness-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* ============================================ */
+/*              MOTIVATIONAL MESSAGE            */
+/* ============================================ */
+
+.motivational-message {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.1));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.motivational-message::before {
+    content: '✨';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    animation: sparkle 2s ease infinite;
+}
+
+.motivational-message::after {
+    content: '✨';
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    animation: sparkle 2s ease infinite 0.5s;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.motivational-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================ */
+/*              RESPONSIVE DESIGN               */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .celebration-notification,
+    .garden-growth-notification {
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
+    
+    .celebration-content,
+    .garden-growth-content {
+        min-width: auto;
+    }
+    
+    .achievement-content {
+        min-width: 280px;
+        max-width: 90vw;
+    }
+    
+    .level-up-content {
+        padding: 2rem;
+        width: 95%;
+    }
+    
+    .level-progression {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .celebration-notification,
+    .garden-growth-notification {
+        bottom: 10px;
+        top: auto;
+        right: 10px;
+    }
+    
+    .achievement-content {
+        min-width: 250px;
+        padding: 1.5rem;
+    }
+    
+    .achievement-icon {
+        font-size: 3rem;
+    }
+    
+    .level-up-content h2 {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================ */
+/*              DARK MODE ADJUSTMENTS           */
+/* ============================================ */
+
+[data-theme="dark"] .gamification-widget {
+    background: linear-gradient(135deg, var(--bg-card), rgba(99, 102, 241, 0.1));
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .motivational-message {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(245, 158, 11, 0.15));
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="dark"] .achievement-content {
+    background: var(--bg-card);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .level-up-content {
+    background: linear-gradient(135deg, var(--bg-card), rgba(99, 102, 241, 0.15));
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}

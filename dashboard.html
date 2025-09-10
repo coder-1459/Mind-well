@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>MindWell</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="tasks.html">Daily Tasks</a></li>
+                <li><a href="mood.html">Mood Tracker</a></li>
+                <li><a href="appointments.html">Book Appointment</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="dashboard-section">
+        <div class="container">
+            <!-- Welcome Header -->
+            <div class="dashboard-header">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome to Your Mental Health Dashboard</h1>
+                    <p class="welcome-subtitle" id="welcomeMessage">Track your progress, monitor your wellness journey, and celebrate your achievements.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshData">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <a href="assessment.html" class="btn btn-primary">
+                        <i class="fas fa-clipboard-check"></i> Take Assessment
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Stats Overview -->
+            <div class="stats-overview">
+                <div class="stat-card primary">
+                    <div class="stat-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="mentalHealthScore">--</h3>
+                        <p>Mental Health Score</p>
+                        <div class="stat-trend" id="scoreTrend">
+                            <span class="trend-indicator">--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="currentStreak">0</h3>
+                        <p>Day Streak</p>
+                        <div class="stat-trend">
+                            <span class="trend-up">Keep going!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="tasksCompleted">0</h3>
+                        <p>Tasks Completed</p>
+                        <div class="stat-trend" id="tasksTrend">
+                            <span>Total completed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="averageMood">--</h3>
+                        <p>Average Mood</p>
+                        <div class="stat-trend" id="moodTrend">
+                            <span>This week</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Charts -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2><i class="fas fa-chart-line"></i> Mental Health Progress</h2>
+                        <div class="chart-controls">
+                            <select id="progressFilter" class="form-control">
+                                <option value="30">Last 30 days</option>
+                                <option value="90">Last 3 months</option>
+                                <option value="365">Last year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-content">
+                        <canvas id="progressChart" width="800" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2><i class="fas fa-heart"></i> Mood Trends</h2>
+                        <div class="mood-summary" id="moodSummary">
+                            <!-- Mood summary will be inserted here -->
+                        </div>
+                    </div>
+                    <div class="chart-content">
+                        <canvas id="moodChart" width="800" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Wisdom Section -->
+            <div class="wisdom-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Today's Wisdom</h2>
+                <div class="wisdom-card" id="wisdomCard">
+                    <!-- Daily wisdom will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Today's Overview -->
+            <div class="today-section">
+                <h2 class="section-title"><i class="fas fa-calendar-day"></i> Today's Overview</h2>
+                <div class="today-grid">
+                    <div class="today-card">
+                        <div class="today-header">
+                            <h3><i class="fas fa-bullseye"></i> Daily Tasks</h3>
+                            <div class="completion-badge" id="tasksCompletionBadge">0/0</div>
+                        </div>
+                        <div class="today-content" id="todaysTasks">
+                            <!-- Today's tasks will be loaded here -->
+                        </div>
+                        <div class="today-actions">
+                            <a href="tasks.html" class="btn btn-primary btn-sm">View All Tasks</a>
+                        </div>
+                    </div>
+
+                    <div class="today-card">
+                        <div class="today-header">
+                            <h3><i class="fas fa-heart"></i> Mood Check</h3>
+                            <div class="mood-status" id="moodStatus">Not logged</div>
+                        </div>
+                        <div class="today-content" id="todaysMood">
+                            <div class="quick-mood-selector" id="quickMoodSelector">
+                                <div class="quick-mood-option" data-mood="excellent" data-emoji="😄" data-value="5">😄</div>
+                                <div class="quick-mood-option" data-mood="good" data-emoji="😊" data-value="4">😊</div>
+                                <div class="quick-mood-option" data-mood="okay" data-emoji="😐" data-value="3">😐</div>
+                                <div class="quick-mood-option" data-mood="low" data-emoji="😔" data-value="2">😔</div>
+                                <div class="quick-mood-option" data-mood="poor" data-emoji="😞" data-value="1">😞</div>
+                            </div>
+                        </div>
+                        <div class="today-actions">
+                            <a href="mood.html" class="btn btn-secondary btn-sm">Detailed Mood Log</a>
+                        </div>
+                    </div>
+
+                    <div class="today-card">
+                        <div class="today-header">
+                            <h3><i class="fas fa-calendar-check"></i> Appointments</h3>
+                            <div class="appointment-count" id="appointmentCount">0 pending</div>
+                        </div>
+                        <div class="today-content" id="upcomingAppointments">
+                            <!-- Upcoming appointments will be loaded here -->
+                        </div>
+                        <div class="today-actions">
+                            <a href="appointments.html" class="btn btn-primary btn-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements & Milestones -->
+            <div class="achievements-section">
+                <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements & Milestones</h2>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Achievements will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
+                <div class="activity-timeline" id="activityTimeline">
+                    <!-- Recent activity will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendations-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Personalized Recommendations</h2>
+                <div class="recommendations-grid" id="recommendationsGrid">
+                    <!-- Recommendations will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindWell</h3>
+                    <p>Your companion for mental wellness and cognitive growth</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="assessment.html">Take Assessment</a></li>
+                        <li><a href="tasks.html">Daily Tasks</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Tips</a></li>
+                        <li><a href="tel:988">Crisis Helpline: 988</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindWell. Created with care for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize theme manager for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.themeManager) {
+                window.themeManager = new ThemeManager();
+            }
+        });
+        class Dashboard {
+            constructor() {
+                this.data = storage.getData();
+                this.init();
+            }
+
+            init() {
+                this.updateWelcomeMessage();
+                this.updateQuickStats();
+                this.loadDailyWisdom();
+                this.loadTodaysOverview();
+                this.loadAchievements();
+                this.loadRecentActivity();
+                this.generateRecommendations();
+                this.drawCharts();
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Refresh data
+                document.getElementById('refreshData').addEventListener('click', () => {
+                    this.refreshDashboard();
+                });
+
+                // Quick mood selector
+                document.querySelectorAll('.quick-mood-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        this.quickLogMood(e.target);
+                    });
+                });
+
+                // Progress filter
+                document.getElementById('progressFilter').addEventListener('change', () => {
+                    this.drawCharts();
+                });
+            }
+
+            updateWelcomeMessage() {
+                const data = this.data;
+                const welcomeEl = document.getElementById('welcomeMessage');
+                
+                if (data.user.name) {
+                    welcomeEl.textContent = `Welcome back, ${data.user.name}! Here's how you're doing on your mental wellness journey.`;
+                } else if (data.user.mentalHealthScore) {
+                    welcomeEl.textContent = `Great to see you again! Your mental health score is ${data.user.mentalHealthScore}%. Keep up the excellent work!`;
+                } else {
+                    welcomeEl.textContent = `Welcome to your mental health journey! Start by taking an assessment to track your progress.`;
+                }
+            }
+
+            updateQuickStats() {
+                const data = this.data;
+                
+                // Mental Health Score
+                const scoreEl = document.getElementById('mentalHealthScore');
+                if (data.user.mentalHealthScore) {
+                    scoreEl.textContent = `${data.user.mentalHealthScore}%`;
+                    this.updateScoreTrend();
+                } else {
+                    scoreEl.textContent = '--';
+                    document.getElementById('scoreTrend').innerHTML = '<span class="trend-neutral">Take assessment</span>';
+                }
+
+                // Streak
+                document.getElementById('currentStreak').textContent = data.streak;
+
+                // Tasks
+                document.getElementById('tasksCompleted').textContent = data.tasksCompleted;
+                
+                // Average Mood
+                if (data.moodEntries.length > 0) {
+                    const avgMood = data.moodEntries.reduce((sum, entry) => sum + entry.value, 0) / data.moodEntries.length;
+                    document.getElementById('averageMood').textContent = avgMood.toFixed(1);
+                    this.updateMoodTrend();
+                } else {
+                    document.getElementById('averageMood').textContent = '--';
+                    document.getElementById('moodTrend').innerHTML = '<span class="trend-neutral">No mood data</span>';
+                }
+            }
+
+            updateScoreTrend() {
+                const assessments = this.data.assessments;
+                if (assessments.length >= 2) {
+                    const latest = assessments[assessments.length - 1].score;
+                    const previous = assessments[assessments.length - 2].score;
+                    const diff = latest - previous;
+                    
+                    const trendEl = document.getElementById('scoreTrend');
+                    if (diff > 0) {
+                        trendEl.innerHTML = `<span class="trend-up">+${diff}% from last assessment</span>`;
+                    } else if (diff < 0) {
+                        trendEl.innerHTML = `<span class="trend-down">${diff}% from last assessment</span>`;
+                    } else {
+                        trendEl.innerHTML = `<span class="trend-neutral">Same as last assessment</span>`;
+                    }
+                }
+            }
+
+            updateMoodTrend() {
+                const entries = this.data.moodEntries;
+                if (entries.length >= 7) {
+                    const recent = entries.slice(-7);
+                    const older = entries.slice(-14, -7);
+                    
+                    if (older.length > 0) {
+                        const recentAvg = recent.reduce((sum, e) => sum + e.value, 0) / recent.length;
+                        const olderAvg = older.reduce((sum, e) => sum + e.value, 0) / older.length;
+                        const trend = recentAvg - olderAvg;
+                        
+                        const trendEl = document.getElementById('moodTrend');
+                        if (trend > 0.2) {
+                            trendEl.innerHTML = '<span class="trend-up">Improving this week</span>';
+                        } else if (trend < -0.2) {
+                            trendEl.innerHTML = '<span class="trend-down">Declining this week</span>';
+                        } else {
+                            trendEl.innerHTML = '<span class="trend-neutral">Stable this week</span>';
+                        }
+                    }
+                }
+            }
+
+            loadDailyWisdom() {
+                const taskGenerator = new TaskGenerator();
+                const todaysWisdom = taskGenerator.getTodaysWisdom();
+                
+                const container = document.getElementById('wisdomCard');
+                container.innerHTML = `
+                    <div class="wisdom-content">
+                        <div class="wisdom-header">
+                            <h3>${todaysWisdom.rule}</h3>
+                            <div class="wisdom-movie">
+                                <i class="fas fa-film"></i>
+                                <span>${todaysWisdom.movie}</span>
+                            </div>
+                        </div>
+                        <div class="wisdom-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p class="hindi-quote">${todaysWisdom.quote}</p>
+                        </div>
+                        <div class="wisdom-meaning">
+                            <p class="wisdom-description">${todaysWisdom.description}</p>
+                            <p class="wisdom-insight"><strong>Insight:</strong> ${todaysWisdom.wisdom}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            loadTodaysOverview() {
+                this.loadTodaysTasks();
+                this.loadTodaysMood();
+                this.loadUpcomingAppointments();
+            }
+
+            loadTodaysTasks() {
+                const today = new Date().toDateString();
+                const todaysTasks = this.data.dailyTasks.filter(task => 
+                    new Date(task.date).toDateString() === today
+                );
+
+                const container = document.getElementById('todaysTasks');
+                const badge = document.getElementById('tasksCompletionBadge');
+                
+                if (todaysTasks.length === 0) {
+                    container.innerHTML = '<p class="no-data">No tasks for today. <a href="tasks.html">Generate new tasks</a></p>';
+                    badge.textContent = '0/0';
+                    return;
+                }
+
+                const completedTasks = todaysTasks.filter(task => task.completed).length;
+                badge.textContent = `${completedTasks}/${todaysTasks.length}`;
+
+                container.innerHTML = todaysTasks.map(task => `
+                    <div class="task-item ${task.completed ? 'completed' : ''}">
+                        <div class="task-icon">
+                            <i class="fas ${task.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
+                        </div>
+                        <div class="task-info">
+                            <h4>${task.title}</h4>
+                            <p>${task.category} • ${task.duration} min</p>
+                        </div>
+                        <div class="task-status">
+                            ${task.completed ? 
+                                '<span class="status-completed">Done</span>' : 
+                                `<span class="status-pending">${this.getTimeRemaining(task.deadline)}</span>`
+                            }
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            loadTodaysMood() {
+                const today = new Date().toDateString();
+                const todaysMood = this.data.moodEntries.find(entry => 
+                    new Date(entry.date).toDateString() === today
+                );
+
+                const statusEl = document.getElementById('moodStatus');
+                const container = document.getElementById('todaysMood');
+
+                if (todaysMood) {
+                    statusEl.textContent = `${todaysMood.emoji} ${todaysMood.label}`;
+                    statusEl.className = 'mood-status logged';
+                    
+                    container.innerHTML = `
+                        <div class="mood-logged">
+                            <div class="mood-display">
+                                <span class="mood-emoji-large">${todaysMood.emoji}</span>
+                                <div class="mood-info">
+                                    <h4>${todaysMood.label}</h4>
+                                    <p>Logged at ${new Date(todaysMood.date).toLocaleTimeString()}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    statusEl.textContent = 'Not logged';
+                    statusEl.className = 'mood-status not-logged';
+                }
+            }
+
+            loadUpcomingAppointments() {
+                const appointments = this.data.appointments;
+                const pendingCount = appointments.filter(apt => apt.status === 'pending').length;
+                
+                document.getElementById('appointmentCount').textContent = `${pendingCount} pending`;
+
+                const container = document.getElementById('upcomingAppointments');
+                
+                if (appointments.length === 0) {
+                    container.innerHTML = '<p class="no-data">No appointments scheduled</p>';
+                    return;
+                }
+
+                const recentAppointments = appointments
+                    .sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate))
+                    .slice(0, 3);
+
+                container.innerHTML = recentAppointments.map(apt => `
+                    <div class="appointment-item">
+                        <div class="appointment-status ${apt.status}">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="appointment-info">
+                            <h4>${apt.preferences.sessionType || 'Consultation'}</h4>
+                            <p>${apt.preferences.urgency} • ${Utils.timeAgo(apt.submissionDate)}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            quickLogMood(option) {
+                const moodData = {
+                    mood: option.dataset.mood,
+                    emoji: option.dataset.emoji,
+                    value: parseInt(option.dataset.value),
+                    label: option.textContent === '😄' ? 'Excellent' :
+                           option.textContent === '😊' ? 'Good' :
+                           option.textContent === '😐' ? 'Okay' :
+                           option.textContent === '😔' ? 'Low' : 'Poor',
+                    energyLevel: 5,
+                    stressLevel: 5,
+                    sleepQuality: 5,
+                    factors: [],
+                    notes: 'Quick mood log from dashboard'
+                };
+
+                storage.addMoodEntry(moodData);
+                Utils.showNotification('Mood logged successfully!', 'success');
+                this.loadTodaysMood();
+                this.updateQuickStats();
+            }
+
+            loadAchievements() {
+                const data = this.data;
+                const achievements = [];
+
+                // Calculate achievements
+                if (data.tasksCompleted >= 1) achievements.push({ icon: 'fa-play', title: 'First Steps', desc: 'Completed your first task' });
+                if (data.tasksCompleted >= 10) achievements.push({ icon: 'fa-star', title: 'Task Master', desc: 'Completed 10 tasks' });
+                if (data.tasksCompleted >= 50) achievements.push({ icon: 'fa-crown', title: 'Champion', desc: 'Completed 50 tasks' });
+                if (data.streak >= 7) achievements.push({ icon: 'fa-fire', title: 'Week Warrior', desc: '7-day streak' });
+                if (data.streak >= 30) achievements.push({ icon: 'fa-medal', title: 'Monthly Master', desc: '30-day streak' });
+                if (data.moodEntries.length >= 30) achievements.push({ icon: 'fa-heart', title: 'Mood Tracker', desc: '30 mood entries' });
+                if (data.assessments.length >= 3) achievements.push({ icon: 'fa-chart-line', title: 'Progress Tracker', desc: '3 assessments completed' });
+
+                const container = document.getElementById('achievementsGrid');
+                
+                if (achievements.length === 0) {
+                    container.innerHTML = '<p class="no-data">Complete tasks and track your mood to unlock achievements!</p>';
+                    return;
+                }
+
+                container.innerHTML = achievements.map(achievement => `
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">
+                            <i class="fas ${achievement.icon}"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>${achievement.title}</h4>
+                            <p>${achievement.desc}</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            loadRecentActivity() {
+                const data = this.data;
+                const activities = [];
+
+                // Collect recent activities
+                data.dailyTasks.filter(task => task.completed).slice(-5).forEach(task => {
+                    activities.push({
+                        type: 'task',
+                        icon: 'fa-check-circle',
+                        title: `Completed task: ${task.title}`,
+                        time: task.completedAt,
+                        color: 'success'
+                    });
+                });
+
+                data.moodEntries.slice(-5).forEach(mood => {
+                    activities.push({
+                        type: 'mood',
+                        icon: 'fa-heart',
+                        title: `Logged mood: ${mood.label} ${mood.emoji}`,
+                        time: mood.date,
+                        color: 'info'
+                    });
+                });
+
+                data.assessments.slice(-3).forEach(assessment => {
+                    activities.push({
+                        type: 'assessment',
+                        icon: 'fa-clipboard-check',
+                        title: `Completed assessment: ${assessment.score}% score`,
+                        time: assessment.date,
+                        color: 'primary'
+                    });
+                });
+
+                // Sort by time
+                activities.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+                const container = document.getElementById('activityTimeline');
+                
+                if (activities.length === 0) {
+                    container.innerHTML = '<p class="no-data">Start using MindWell to see your activity here!</p>';
+                    return;
+                }
+
+                container.innerHTML = activities.slice(0, 10).map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon ${activity.color}">
+                            <i class="fas ${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>${activity.title}</h4>
+                            <p>${Utils.timeAgo(activity.time)}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            generateRecommendations() {
+                const data = this.data;
+                const recommendations = [];
+
+                // Generate personalized recommendations
+                if (!data.user.mentalHealthScore) {
+                    recommendations.push({
+                        icon: 'fa-clipboard-check',
+                        title: 'Take Your First Assessment',
+                        desc: 'Get a baseline measurement of your mental health',
+                        action: 'Start Assessment',
+                        link: 'assessment.html',
+                        priority: 'high'
+                    });
+                }
+
+                if (data.moodEntries.length === 0) {
+                    recommendations.push({
+                        icon: 'fa-smile',
+                        title: 'Start Mood Tracking',
+                        desc: 'Track your daily emotions to identify patterns',
+                        action: 'Log Mood',
+                        link: 'mood.html',
+                        priority: 'medium'
+                    });
+                }
+
+                if (data.dailyTasks.filter(task => !task.completed).length === 0) {
+                    recommendations.push({
+                        icon: 'fa-tasks',
+                        title: 'Try Daily Tasks',
+                        desc: 'Complete cognitive exercises to boost your mental wellness',
+                        action: 'View Tasks',
+                        link: 'tasks.html',
+                        priority: 'medium'
+                    });
+                }
+
+                if (data.user.mentalHealthScore && data.user.mentalHealthScore < 60) {
+                    recommendations.push({
+                        icon: 'fa-user-md',
+                        title: 'Consider Professional Support',
+                        desc: 'Your recent scores suggest talking to a professional might help',
+                        action: 'Book Appointment',
+                        link: 'appointments.html',
+                        priority: 'high'
+                    });
+                }
+
+                if (data.streak === 0 && data.tasksCompleted > 0) {
+                    recommendations.push({
+                        icon: 'fa-fire',
+                        title: 'Build a Streak',
+                        desc: 'Complete tasks daily to build momentum in your wellness journey',
+                        action: 'Start Today',
+                        link: 'tasks.html',
+                        priority: 'low'
+                    });
+                }
+
+                const container = document.getElementById('recommendationsGrid');
+                
+                if (recommendations.length === 0) {
+                    recommendations.push({
+                        icon: 'fa-trophy',
+                        title: 'Keep Up the Great Work!',
+                        desc: 'You\'re doing amazing on your mental health journey',
+                        action: 'Continue',
+                        link: '#',
+                        priority: 'low'
+                    });
+                }
+
+                container.innerHTML = recommendations.map(rec => `
+                    <div class="recommendation-card ${rec.priority}">
+                        <div class="recommendation-icon">
+                            <i class="fas ${rec.icon}"></i>
+                        </div>
+                        <div class="recommendation-content">
+                            <h4>${rec.title}</h4>
+                            <p>${rec.desc}</p>
+                            <a href="${rec.link}" class="btn btn-sm ${rec.priority === 'high' ? 'btn-primary' : 'btn-secondary'}">${rec.action}</a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getTimeRemaining(deadline) {
+                const now = new Date();
+                const end = new Date(deadline);
+                const diff = end - now;
+
+                if (diff <= 0) return 'Expired';
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                if (hours > 0) return `${hours}h ${minutes}m left`;
+                return `${minutes}m left`;
+            }
+
+            drawCharts() {
+                this.drawProgressChart();
+                this.drawMoodChart();
+            }
+
+            drawProgressChart() {
+                const canvas = document.getElementById('progressChart');
+                const ctx = canvas.getContext('2d');
+                const assessments = this.data.assessments;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (assessments.length === 0) {
+                    ctx.fillStyle = '#6b7280';
+                    ctx.font = '16px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No assessment data available', canvas.width / 2, canvas.height / 2);
+                    return;
+                }
+
+                const padding = 60;
+                const chartWidth = canvas.width - 2 * padding;
+                const chartHeight = canvas.height - 2 * padding;
+
+                // Draw axes
+                ctx.strokeStyle = '#e5e7eb';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(padding, padding);
+                ctx.lineTo(padding, canvas.height - padding);
+                ctx.lineTo(canvas.width - padding, canvas.height - padding);
+                ctx.stroke();
+
+                // Draw data
+                ctx.strokeStyle = '#6366f1';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+
+                assessments.forEach((assessment, index) => {
+                    const x = padding + (chartWidth / (assessments.length - 1)) * index;
+                    const y = canvas.height - padding - (chartHeight * assessment.score / 100);
+                    
+                    if (index === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                });
+                
+                ctx.stroke();
+
+                // Draw data points
+                ctx.fillStyle = '#6366f1';
+                assessments.forEach((assessment, index) => {
+                    const x = padding + (chartWidth / (assessments.length - 1)) * index;
+                    const y = canvas.height - padding - (chartHeight * assessment.score / 100);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                });
+            }
+
+            drawMoodChart() {
+                const canvas = document.getElementById('moodChart');
+                const ctx = canvas.getContext('2d');
+                const days = 30;
+                const moodEntries = this.data.moodEntries.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    const cutoff = new Date();
+                    cutoff.setDate(cutoff.getDate() - days);
+                    return entryDate >= cutoff;
+                });
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (moodEntries.length === 0) {
+                    ctx.fillStyle = '#6b7280';
+                    ctx.font = '16px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No mood data available', canvas.width / 2, canvas.height / 2);
+                    return;
+                }
+
+                const padding = 60;
+                const chartWidth = canvas.width - 2 * padding;
+                const chartHeight = canvas.height - 2 * padding;
+
+                // Draw mood line
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+
+                moodEntries.forEach((entry, index) => {
+                    const x = padding + (chartWidth / (moodEntries.length - 1)) * index;
+                    const y = canvas.height - padding - (chartHeight * (entry.value - 1) / 4);
+                    
+                    if (index === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                });
+                
+                ctx.stroke();
+
+                // Draw mood points
+                ctx.fillStyle = '#10b981';
+                moodEntries.forEach((entry, index) => {
+                    const x = padding + (chartWidth / (moodEntries.length - 1)) * index;
+                    const y = canvas.height - padding - (chartHeight * (entry.value - 1) / 4);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                    ctx.fill();
+                });
+            }
+
+            refreshDashboard() {
+                this.data = storage.getData();
+                this.init();
+                Utils.showNotification('Dashboard refreshed successfully!', 'success');
+            }
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.pathname.includes('dashboard.html')) {
+                new Dashboard();
+            }
+        });
+    </script>
+
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-section {
+            padding: 2rem 0 4rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+            gap: 2rem;
+        }
+
+        .welcome-content {
+            flex: 1;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid transparent;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card.primary {
+            border-left-color: var(--primary-color);
+        }
+
+        .stat-card.success {
+            border-left-color: var(--secondary-color);
+        }
+
+        .stat-card.warning {
+            border-left-color: var(--accent-color);
+        }
+
+        .stat-card.info {
+            border-left-color: #06b6d4;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-card.primary .stat-icon {
+            background: linear-gradient(135deg, var(--primary-color), rgba(99, 102, 241, 0.8));
+        }
+
+        .stat-card.success .stat-icon {
+            background: linear-gradient(135deg, var(--secondary-color), rgba(16, 185, 129, 0.8));
+        }
+
+        .stat-card.warning .stat-icon {
+            background: linear-gradient(135deg, var(--accent-color), rgba(245, 158, 11, 0.8));
+        }
+
+        .stat-card.info .stat-icon {
+            background: linear-gradient(135deg, #06b6d4, rgba(6, 182, 212, 0.8));
+        }
+
+        .stat-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-content p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-trend {
+            font-size: 0.85rem;
+        }
+
+        .trend-up {
+            color: var(--secondary-color);
+        }
+
+        .trend-down {
+            color: var(--danger-color);
+        }
+
+        .trend-neutral {
+            color: var(--text-secondary);
+        }
+
+        .charts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .chart-content {
+            padding: 1.5rem;
+        }
+
+        .wisdom-section {
+            margin-bottom: 4rem;
+        }
+
+        .wisdom-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(16, 185, 129, 0.05));
+            border: 2px solid var(--primary-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .wisdom-content {
+            text-align: center;
+        }
+
+        .wisdom-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .wisdom-header h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .wisdom-movie {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .wisdom-quote {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .wisdom-quote i {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--bg-card);
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            padding: 0.5rem;
+        }
+
+        .hindi-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-primary);
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0;
+            margin-top: 1rem;
+        }
+
+        .wisdom-meaning {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .wisdom-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .wisdom-insight {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .today-section {
+            margin-bottom: 4rem;
+        }
+
+        .today-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .today-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .today-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .today-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .completion-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .mood-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .mood-status.logged {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .mood-status.not-logged {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .appointment-count {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .today-content {
+            padding: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .today-actions {
+            padding: 1rem 1.5rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+        }
+
+        .task-icon i {
+            color: var(--primary-color);
+        }
+
+        .task-item.completed .task-icon i {
+            color: var(--secondary-color);
+        }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .task-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .status-completed {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .status-pending {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .quick-mood-selector {
+            display: flex;
+            justify-content: space-around;
+            gap: 0.5rem;
+        }
+
+        .quick-mood-option {
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .quick-mood-option:hover {
+            transform: scale(1.2);
+            background: var(--bg-secondary);
+        }
+
+        .mood-logged {
+            text-align: center;
+        }
+
+        .mood-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .mood-emoji-large {
+            font-size: 3rem;
+        }
+
+        .mood-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .mood-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .appointment-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+
+        .appointment-status {
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .appointment-status.pending i {
+            color: var(--accent-color);
+        }
+
+        .appointment-status.confirmed i {
+            color: var(--secondary-color);
+        }
+
+        .appointment-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .appointment-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .achievement-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .achievement-card.earned {
+            border: 2px solid var(--secondary-color);
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-color), #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-icon i {
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .achievement-badge {
+            width: 24px;
+            height: 24px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+
+        .achievement-badge i {
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .activity-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-icon.success {
+            background: var(--secondary-color);
+        }
+
+        .activity-icon.info {
+            background: #06b6d4;
+        }
+
+        .activity-icon.primary {
+            background: var(--primary-color);
+        }
+
+        .activity-icon i {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .activity-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .recommendation-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            border-left: 4px solid transparent;
+        }
+
+        .recommendation-card.high {
+            border-left-color: var(--danger-color);
+        }
+
+        .recommendation-card.medium {
+            border-left-color: var(--accent-color);
+        }
+
+        .recommendation-card.low {
+            border-left-color: var(--secondary-color);
+        }
+
+        .recommendation-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .recommendation-card.high .recommendation-icon {
+            background: var(--danger-color);
+        }
+
+        .recommendation-card.medium .recommendation-icon {
+            background: var(--accent-color);
+        }
+
+        .recommendation-card.low .recommendation-icon {
+            background: var(--secondary-color);
+        }
+
+        .recommendation-icon i {
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .recommendation-content {
+            flex: 1;
+        }
+
+        .recommendation-content h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .no-data {
+            color: var(--text-secondary);
+            text-align: center;
+            font-style: italic;
+            margin: 2rem 0;
+        }
+
+        .no-data a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .no-data a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                justify-content: flex-end;
+                margin-top: 1rem;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .stats-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+
+            .today-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .chart-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .wisdom-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .wisdom-meaning {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell - Your Mental Health Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>MindWell</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="tasks.html">Daily Tasks</a></li>
+                <li><a href="mood.html">Mood Tracker</a></li>
+                <li><a href="appointments.html">Book Appointment</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-3d-container">
+            <canvas id="hero-3d-canvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Transform Your Mental Health Journey</h1>
+            <p class="hero-subtitle">Track your mood, complete daily wellness tasks, and connect with mental health professionals</p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your mental health with scientific assessments</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Daily Tasks</h3>
+                    <p>Complete IQ-boosting activities for cognitive growth</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-smile"></i>
+                    <h3>Mood Tracking</h3>
+                    <p>Log and analyze your emotional patterns</p>
+                </div>
+            </div>
+            <div class="cta-buttons">
+                <a href="assessment.html" class="btn btn-primary">Take Assessment</a>
+                <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-3d-container">
+            <canvas id="features-3d-canvas"></canvas>
+        </div>
+        <div class="container">
+            <h2 class="section-title">How MindWell Helps You</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Mental Health Assessment</h3>
+                    <p>Complete a comprehensive questionnaire to understand your current mental health status with percentage-based insights</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Cognitive Enhancement</h3>
+                    <p>Daily tasks designed to boost IQ and mental resilience - the opposite of harmful challenges, focusing on growth</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>20-Hour Task System</h3>
+                    <p>Flexible daily challenges that fit into your schedule with 20-hour completion windows</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Mood Monitoring</h3>
+                    <p>Track your emotional state daily and identify patterns in your mental wellness journey</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Professional Support</h3>
+                    <p>Book appointments with qualified psychologists for counseling when you need extra support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <h3>Progress Analytics</h3>
+                    <p>Visualize your improvement over time with detailed charts and insights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Wisdom Tips -->
+    <section class="wisdom-tips">
+        <div class="wisdom-3d-container">
+            <canvas id="wisdom-3d-canvas"></canvas>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Daily Wisdom for Mental Wellness</h2>
+            <div class="tips-carousel">
+                <div class="tip-card active">
+                    <div class="tip-icon"><i class="fas fa-sun"></i></div>
+                    <h3>Start with Gratitude</h3>
+                    <p>"Let gratitude ground your day—name one good thing each morning."</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Find Your Calm</h3>
+                    <p>"Wake up before the noise begins and meet your calm in silence."</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Small Wins Matter</h3>
+                    <p>"Make one small win your first act each day—celebrate consistency."</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Challenge Your Mind</h3>
+                    <p>"Solve a riddle, learn a fact, or reflect for five minutes daily."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats Display -->
+    <section class="quick-stats" id="quickStats">
+        <div class="stats-3d-container">
+            <canvas id="stats-3d-canvas"></canvas>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Your Quick Overview</h2>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <i class="fas fa-percentage"></i>
+                    <h3 id="mentalHealthScore">--</h3>
+                    <p>Mental Health Score</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-fire"></i>
+                    <h3 id="streakDays">0</h3>
+                    <p>Day Streak</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="tasksCompleted">0</h3>
+                    <p>Tasks Completed</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-smile-beam"></i>
+                    <h3 id="currentMood">--</h3>
+                    <p>Today's Mood</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MindWell</h3>
+                    <p>Your companion for mental wellness and cognitive growth</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="assessment.html">Take Assessment</a></li>
+                        <li><a href="tasks.html">Daily Tasks</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Mental Health Tips</a></li>
+                        <li><a href="#">Emergency Helpline</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MindWell. Created with care for mental wellness.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="3d-animations-full.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
